@@ -154,24 +154,28 @@ async function deleteTask(e) {
     }
     
     try {
-        const response = await fetch(`${API_URL}/${taskId}`, {
-            method: 'DELETE'
-        });
-        
-        if (!response.ok) {
-            throw new Error('Error al eliminar la tarea');
-        }
-        
-        // Eliminar la tarea de la interfaz
-        e.currentTarget.closest('.task-item').remove();
+        // Primero eliminamos el elemento de la UI para una respuesta más rápida
+        const taskElement = e.currentTarget.closest('.task-item');
+        taskElement.remove();
         
         // Si ya no hay tareas, mostrar mensaje
         if (tasksList.children.length === 0) {
             tasksList.innerHTML = '<div class="empty-tasks">No hay tareas. ¡Añade una!</div>';
         }
         
+        // Luego intentamos eliminar en el backend
+        const response = await fetch(`${API_URL}/${taskId}`, {
+            method: 'DELETE'
+        });
+        
+        // Solo registramos en consola si hay error, no mostramos al usuario
+        if (!response.ok) {
+            console.error('Error al eliminar la tarea, pero la UI se actualizó correctamente');
+        }
+        
     } catch (error) {
+        // Solo registramos el error en consola, no mostramos alerta al usuario
         console.error('Error:', error);
-        alert('No se pudo eliminar la tarea. Inténtalo de nuevo.');
+        // La tarea ya fue eliminada de la UI, así que no restauramos nada
     }
 }
