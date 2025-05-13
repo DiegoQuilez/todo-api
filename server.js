@@ -1,3 +1,12 @@
+// Agrega estas líneas al principio de tu archivo server.js, justo después de crear la app
+const cors = require('cors');
+app.use(cors({
+  origin: '*', // En producción, limita esto a dominios específicos
+  methods: ['GET', 'POST', 'DELETE', 'PATCH', 'PUT'],
+  credentials: true
+}));
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -30,3 +39,4 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => {
     console.error('Error conectando a MongoDB:', err.message);
   });
+
