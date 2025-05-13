@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mis Tareas</h1>
+        
+        <div class="add-task">
+            <form id="task-form">
+                <input type="text" id="task-title" placeholder="Título de la tarea" required>
+                <textarea id="task-description" placeholder="Descripción de la tarea"></textarea>
+                <button type="submit" class="btn-add">Añadir Tarea</button>
+            </form>
+        </div>
+        
+        <div class="tasks-container">
+            <h2>Tareas Pendientes</h2>
+            <div id="tasks-list" class="tasks-list">
+                <!-- Las tareas se cargarán aquí dinámicamente -->
+                <div class="loading">Cargando tareas...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
